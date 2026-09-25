@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using MicroGrad.Net;
+
+var a = new Value(2);
+var b = new Value(3);
+
+var c = a.Multiply(b);
+
+GraphVisualiser.SaveSvg(c, "graph.svg");
