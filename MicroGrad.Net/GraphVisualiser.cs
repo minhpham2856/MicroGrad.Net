@@ -45,8 +45,7 @@ public class GraphVisualiser
 			// Create the Value node
 			Node node = graph.GetOrAddNode(id);
 			node.SetAttribute("shape", "record");
-			node.SetAttribute("label", $"{{Value|data {value.Data:F4}|grad {value.Grad:F4}}}"
-			);
+			node.SetAttribute("label", $"{{{value.Label} | data {value.Data:F4}| grad {value.Grad:F4}}}");
 
 			// If this Value came from an operation, create an operation node
 			if (!string.IsNullOrEmpty(value.OperatorType))
