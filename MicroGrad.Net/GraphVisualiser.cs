@@ -1,7 +1,8 @@
 ﻿using MicroGrad.Net;
 using Rubjerg.Graphviz;
+using System.Diagnostics;
 
-public class GraphVisualiser
+internal static class GraphVisualiser
 {
 	// Recursively collects every Value node and the edges between parent/child Values
 	private static (HashSet<Value> Nodes, HashSet<(Value From, Value To)> Edges) Trace(Value root)
@@ -26,10 +27,10 @@ public class GraphVisualiser
 		return (nodes, edges);
 	}
 
-	// Generates a unique node ID from the Value's hash code.
+	// Generates a unique node ID from the Value's hash code
 	private static string GetId(Value value) => $"v_{value.GetHashCode()}";
 
-	public static void SaveSvg(Value root, string filePath)
+	public static void CreateSvg(Value root, string filePath)
 	{
 		var (nodes, edges) = Trace(root);
 
@@ -72,5 +73,12 @@ public class GraphVisualiser
 		}
 
 		graph.ToSvgFile(filePath);
+
+		// Open file after creation
+		Process.Start(new ProcessStartInfo
+		{
+			FileName = filePath,
+			UseShellExecute = true
+		});
 	}
 }
